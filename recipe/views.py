@@ -12,6 +12,8 @@ def category_list(request):
 def recipe_list(request, category_id=None):
     if category_id:
         recipes = Recipe.objects.filter(category_id=category_id)
+        category_name = Category.objects.get(id=category_id).name
     else:
         recipes = Recipe.objects.all()
-    return render(request, 'recipe/recipe_list.html', {'recipes': recipes})
+        category_name = None
+    return render(request, 'recipe/recipe_list.html', {'recipes': recipes, 'category_name': category_name})
