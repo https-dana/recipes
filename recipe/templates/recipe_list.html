@@ -2,25 +2,19 @@
 
 {% block content %}
   <div class="container">
-    <h1>Recipes{% if category_name %} in "{{ category_name }}"{% endif %}</h1>
+    <h1>Всі рецепти</h1>
     {% for recipe in recipes %}
       <div class="card my-3">
+        <div class="card-header">{{ recipe.title }}</div>
         <div class="card-body">
-          <h5 class="card-title">{{ recipe.title }}</h5>
-          <p class="card-text">{{ recipe.description }}</p>
-          <p class="card-text"><strong>Ingredients:</strong> {{ recipe.ingredients }}</p>
-          <p class="card-text"><strong>Instructions:</strong> {{ recipe.instructions }}</p>
-          <p class="card-text">
-            <small class="text-muted">Created at: {{ recipe.created_at|date:"Y-m-d H:i" }}</small><br>
-            <small class="text-muted">Updated at: {{ recipe.updated_at|date:"Y-m-d H:i" }}</small>
-          </p>
-          <p class="card-text">
-            <small class="text-muted">Category: {{ recipe.category.name }}</small>
-          </p>
+          <p><strong>Опис:</strong> {{ recipe.description }}</p>
+          <p><strong>Інгредієнти:</strong> {{ recipe.ingredients }}</p>
+          <p><strong>Інструкції:</strong> {{ recipe.instructions }}</p>
+          <p><em>Категорія:</em> {{ recipe.category.name }}</p>
         </div>
       </div>
     {% empty %}
-      <p>No recipes found{% if category_name %} for category "{{ category_name }}"{% endif %}.</p>
+      <p>Рецепти відсутні.</p>
     {% endfor %}
   </div>
 {% endblock %}

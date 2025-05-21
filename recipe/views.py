@@ -1,19 +1,18 @@
-from django.shortcuts import render
-from .models import Category, Recipe 
+from django.shortcuts import render, get_object_or_404
+from .models import Category, Recipe
 
 def main(request):
+    # Головна сторінка, наприклад, показує всі категорії
     categories = Category.objects.all()
-    return render(request, 'main.html', context={'categories': categories})
+    return render(request, 'main.html', {'categories': categories})
 
 def category_list(request):
+    # Список усіх категорій
     categories = Category.objects.all()
-    return render(request, 'recipe/category_list.html', {'categories': categories})
+    return render(request, 'categories.html', {'categories': categories})
 
-def recipe_list(request, category_id=None):
-    if category_id:
-        recipes = Recipe.objects.filter(category_id=category_id)
-        category_name = Category.objects.get(id=category_id).name
-    else:
-        recipes = Recipe.objects.all()
-        category_name = None
-    return render(request, 'recipe/recipe_list.html', {'recipes': recipes, 'category_name': category_name})
+def recipe_list(request):
+    # Список усіх рецептів
+    recipes = Recipe.objects.all()
+    return render(request, 'recipes.html', {'recipes': recipes})
+

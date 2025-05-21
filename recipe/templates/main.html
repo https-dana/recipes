@@ -2,23 +2,13 @@
 
 {% block content %}
   <div class="container">
-    <h1>Book of Recipes</h1>
-    {% for category in categories %}
-      <div class="card my-4">
-        <div class="card-header">{{ category.name }}</div>
-        <div class="card-body">
-          {% for recipe in category.recipes.all %}
-            <div class="card mb-3">
-              <div class="card-body">
-                <h5 class="card-title">{{ recipe.title }}</h5>
-                <p class="card-text">{{ recipe.description }}</p>
-                <p class="card-text"><strong>Ingredients:</strong> {{ recipe.ingredients }}</p>
-                <p class="card-text"><strong>Instructions:</strong> {{ recipe.instructions }}</p>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-    {% endfor %}
+    <h1>Книга рецептів - Категорії</h1>
+    <ul>
+      {% for category in categories %}
+        <li><a href="{% url 'recipe_by_category' category.id %}">{{ category.name }}</a></li>
+      {% empty %}
+        <li>Категорії відсутні.</li>
+      {% endfor %}
+    </ul>
   </div>
 {% endblock %}
