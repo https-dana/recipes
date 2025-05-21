@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1>Recipes{% if category_name %} in "{{ category_name }}"{% endif %}</h1>
+    {% for recipe in recipes %}
+      <div class="card my-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ recipe.title }}</h5>
+          <p class="card-text">{{ recipe.description }}</p>
+          <p class="card-text"><strong>Ingredients:</strong> {{ recipe.ingredients }}</p>
+          <p class="card-text"><strong>Instructions:</strong> {{ recipe.instructions }}</p>
+          <p class="card-text">
+            <small class="text-muted">Created at: {{ recipe.created_at|date:"Y-m-d H:i" }}</small><br>
+            <small class="text-muted">Updated at: {{ recipe.updated_at|date:"Y-m-d H:i" }}</small>
+          </p>
+          <p class="card-text">
+            <small class="text-muted">Category: {{ recipe.category.name }}</small>
+          </p>
+        </div>
+      </div>
+    {% empty %}
+      <p>No recipes found{% if category_name %} for category "{{ category_name }}"{% endif %}.</p>
+    {% endfor %}
+  </div>
+{% endblock %}
