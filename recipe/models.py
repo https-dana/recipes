@@ -6,10 +6,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-    def __iter__(self):
-        yield self.name
-
-
 class Recipe(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
@@ -17,7 +13,7 @@ class Recipe(models.Model):
     ingredients = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='recipes')
 
     def __str__(self):
         return self.title
